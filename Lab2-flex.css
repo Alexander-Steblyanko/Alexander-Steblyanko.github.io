@@ -1,0 +1,74 @@
+/* Misc */
+p.flowery { color: green; font-size: 18px; font-style: italic; }
+
+ul, ol > li { font-size: 16px; text-align: left; }
+
+img { display: block; margin-left: auto; margin-right: auto; }
+
+/* Flex Setup, 4 - full flex, 1 - 25% */
+/*
+.flex-header-1 { flex: 1; }
+.flex-horizontal-1 { flex: 3; }
+
+.flex-vertical-2 { flex: 3; } 
+*/
+/* cell - flex: 1 */
+/*
+.flex-horizontal-2 { flex: 2; }
+*/
+/* cell - flex: 1 */
+/*
+.flex-vertical-3 { flex: 0.5; }
+*/
+/* cell - flex: 1 */
+
+
+
+.flex-container-vertical-1, .flex-container-vertical-2, .flex-container-vertical-3 {
+	display: flex;
+	flex-flow: column;
+	justify-content: space-evenly;
+	align-items: stretch;
+	background-color: #ffffff;
+	
+}
+
+.flex-container-horizontal-1, .flex-container-horizontal-2, .flex-container-horizontal-3 {
+	display: flex;
+	flex-flow: row;
+	justify-content: space-evenly;
+	align-items: stretch;
+	background-color: #ffffff;
+}
+
+.flex-container-horizontal-header-1, .flex-container-horizontal-header-2 {
+	display: flex;
+	flex-flow: row;
+	justify-content: space-evenly;
+	align-items: center;
+	background-color: #f7d1ff;
+}
+
+.cell {
+	background-color: #f7d1ff;
+	padding: 10px 0;
+	font-size: 14px;
+	padding: 10px;
+	margin: 10px;
+	
+	display: flex; 
+	flex-direction: column; 
+	align-items: center; 
+	justify-content: center;
+}
+
+.header { 
+	background-color: #ffffff; 
+	padding-right: 10px; 
+	padding-left: 10px; 
+	border-style: double; 
+	border-width: thick; 
+	border-color: green; 
+	margin: 10px;
+	width: 650px;
+}
