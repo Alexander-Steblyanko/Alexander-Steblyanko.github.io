@@ -1,0 +1,214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML  4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+ <head>
+  <script>
+  /* Task 1 */
+  var h1 = "Заголовок 1";
+  var h2 = "Заголовок 2";
+
+  /* Task 2 */
+  function calc_circle_area(r) {document.write(Math.PI*Math.pow(r,2));}
+  
+  /* Task 3 */
+  function calcmaxes() { 
+	function settoval(el, i) { numarray.push(Number(el.value)); };
+	
+	var numarray = [];
+	var elarray = Array.from(document.getElementsByClassName("maxContender"));
+	elarray.forEach(settoval);
+	var maxim = Math.max(...numarray);
+	var maxcount = 0;
+	
+	function addtocount(el) { if (el === maxim) 
+	{ maxcount = maxcount + 1; }
+	};
+	
+	numarray.forEach(addtocount);
+	alert("There were "+maxcount+" maximums.");
+	document.cookie = "maxcount="+maxcount+"; path=/; max-age=3600";
+	console.log(document.cookie);
+  };
+  
+  function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+      	c = c.substring(1);
+      };
+      if (c.indexOf(name) == 0) {
+      	return c.substring(name.length, c.length);
+      };
+  	};
+    return "";
+  };
+
+  function confirmcookies() {
+    var mc = getCookie("maxcount");
+	if(mc) {
+      if ( confirm("The max was "+mc+". Would you like to reload?")) {
+		document.cookie = "maxcount=; max-age=0";
+		document.reload();
+	  } else { 
+        alert("You really should reload, you know.");
+        confirmCookies();
+  	  };
+    };
+  };
+  
+  /* Task 5 */
+  function complaint() {alert("DON'T LEAVE ME!");};
+  </script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Стеблянко 3</title>
+  <link rel="stylesheet" href="Lab2-grid.css">
+ </head>
+ <body onload="getcolor(); confirmcookies(); for(i=1; i < 7; i++) {loadElement(i);}">
+ <script>
+ function alterElement(id) {
+  el = document.getElementById("el"+id);
+  val = document.getElementById("val"+id).value +
+  "<input type=\"submit\" onclick=\"cleanseElement("+id+")\" value=\"CLEANSE\">";
+  localStorage.setItem(id, val);
+  alert(localStorage.getItem(id));
+  el.innerHTML = val;
+};
+
+function loadElement(id) {
+  if (localStorage.getItem(id)) { 
+    document.getElementById("el"+id).innerHTML = localStorage.getItem(id);
+    };
+  };
+
+function cleanseElement(id) {
+  localStorage.removeItem(id);
+  document.getElementById("el"+id).reload(true);
+};
+ </script>
+  <div class="grid-container" id="cont">
+    <div class="item1">
+	  <div class="sub-grid-container-1">
+		<div class="item-sub-d" id="el1"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum tristique diam, eu iaculis odio tempor ut. Duis non libero eu felis tincidunt consectetur pellentesque eget velit.</p>
+		<form>
+		<input type="text" id="val1">
+		<input type="button" onclick="alterElement(1)" value="Replace">
+		</form>
+		
+		</div>
+        <div class="item-sub-h">
+          <p class="flowery">
+		  <script>document.write(h2);</script>
+		  </p>
+        </div>
+	  </div>
+	</div>
+    
+    <div class="item2" id="el2"><p id="item2t">Suspendisse sapien neque, rutrum a porta ac, suscipit quis urna. Duis id massa lectus. Curabitur eget velit vitae dolor congue iaculis. Quisque viverra, orci vitae fermentum mollis, felis eros gravida metus, a pellentesque nibh ante quis orci. Nullam tortor justo, vehicula sit amet tristique sed, condimentum euismod massa. Integer in felis eleifend, placerat tortor nec, luctus velit. Ut semper nulla et lectus facilisis efficitur.</p>
+	<input type="color" id="item2c" onchange="setcolor()">
+	<script>
+	/* Task 4 */
+	// Connected to color input
+	function setcolor(){
+	  var colText = document.getElementById("item2t");
+	  var colInput = document.getElementById("item2c");
+	  
+	  colText.style.color = colInput.value;
+	  localStorage.setItem("c2", colInput.value);
+	  //alert(localStorage.getItem("c2"));
+	};
+	
+	// Connected to body
+	function getcolor() {
+	  var colText = document.getElementById("item2t");
+	  var colInput = document.getElementById("item2c");
+	  
+      if(localStorage.getItem("c2")) { 
+		colText.style.color = localStorage.getItem("c2");
+		colInput.value = localStorage.getItem("c2");
+	  };
+	};
+	</script>
+	<form>
+	<input type="text" id="val2">
+	<input type="button" onclick="alterElement('2')" value="Replace">
+	</form>
+	</div>
+	
+    <div class="item3" id="el3">
+	<img src="Bostonflowers.png" height="300" width="300" alt="Boston Flowers logo" usemap="#flowers">
+	<map name="flowers"><area shape="rect" coords="25, 260, 270, 300" href="https://blaseball.fandom.com/wiki/Boston_Flowers">
+	<p>Phasellus ultricies mauris vitae tincidunt pretium. Nam et mollis lectus. Nulla in convallis dolor. Etiam non rutrum quam. Vivamus tortor lectus, dapibus ac tortor vulputate, faucibus laoreet massa. Nulla venenatis orci dui, quis mollis magna tempor eget. Vestibulum a felis augue.</p>
+	
+    <label>Площа кола з радіусом 3:</label>
+    <script>
+	calc_circle_area(3);
+	</script>
+	
+	<p>Розрахунок кількості максимумів з 10 чисел:</p>
+	<form>
+	  <input type="number" class="maxContender" id="n1">
+	  <input type="number" class="maxContender" id="n2">
+	  <input type="number" class="maxContender" id="n3">
+	  <input type="number" class="maxContender" id="n4">
+	  <input type="number" class="maxContender" id="n5">
+	  <input type="number" class="maxContender" id="n6">
+	  <input type="number" class="maxContender" id="n7">
+	  <input type="number" class="maxContender" id="n8">
+	  <input type="number" class="maxContender" id="n9">
+	  <input type="number" class="maxContender" id="n10">
+	  <label><br></label>
+	  <input type="button" onclick="calcmaxes()" value="Calculate">
+	</form>
+	
+	<form>
+	<input type="text" id="val3">
+	<input type="button" onclick="alterElement('3')" value="Replace">
+	</form>
+    </div>
+	
+    <div class="item4" id="el4"><input type="text" id="item4t" onblur="complaint()" value="Please notice me!">
+	<p>Nullam hendrerit, sapien id varius pellentesque, diam ligula vehicula tortor, nec scelerisque mauris sapien vel ligula.</p> 
+	<ol>
+	<li>Nullam molestie ut justo in tempus.</li> 
+	<li>Etiam nec aliquam arcu.</li> 
+	<li>Pellentesque vel felis varius, bibendum lacus ullamcorper, hendrerit ipsum.</li>
+	</ol>
+	<p>Curabitur rutrum euismod felis, nec lobortis justo vehicula in. Suspendisse pulvinar efficitur lorem, sit amet aliquam lectus cursus eu. Donec in elit vel ex porta aliquet. Ut aliquet tortor dolor, vestibulum facilisis urna venenatis id. Nulla rutrum, odio sit amet blandit posuere, odio mi convallis purus, at tempus ipsum est vitae eros. Nullam sollicitudin libero sed lacus varius suscipit. Pellentesque non turpis eros.</p>
+    
+	<form>
+	<input type="text" id="val4">
+	<input type="button" onclick="alterElement('4')" value="Replace">
+	</form>
+    </div>
+    <div class="item5" id="el5"><p>Aliquam sodales mi sit amet arcu laoreet, et condimentum augue rhoncus. Ut id nulla a magna venenatis lacinia eget ac ante. Etiam vitae magna vulputate, ultrices lacus non, sodales massa. In hac habitasse platea dictumst. Sed ac mauris luctus, placerat massa bibendum, iaculis orci. Curabitur venenatis scelerisque eros viverra aliquet. Vivamus non tellus tincidunt, suscipit mi pretium, commodo orci. Sed vel mi suscipit, porta dolor quis, euismod nunc.</p>
+    <form>
+	<input type="text" id="val5">
+	<input type="button" onclick="alterElement('5')" value="Replace">
+	</form>
+    </div>
+    <div class="item6">
+      <div class="sub-grid-container-2">
+		<div class="item-sub-ha">
+		  <p class="flowery">
+		  <script>
+		  document.write(h1);
+		  </script>
+		  </p>
+		</div>	
+		<div class="item-sub-da" id="el6"><p>Integer elit velit, ornare vitae finibus quis, accumsan at elit. Nunc pharetra, nulla vel tempor consectetur, nulla felis commodo mi, a porta turpis turpis vel lorem. Phasellus ullamcorper efficitur facilisis. Morbi dolor justo, rhoncus interdum est at, fringilla faucibus massa. Sed viverra dui quis leo maximus posuere. Pellentesque ut risus non nulla mattis semper. Nullam vitae tincidunt velit. Curabitur tempus magna et ullamcorper gravida. Aenean ac metus sit amet nunc finibus pellentesque. Morbi ut mi efficitur, viverra dolor sed, ultrices felis. Integer non scelerisque tortor. Mauris nibh elit, pulvinar id porttitor at, gravida ornare ligula.</p>
+		<form>
+		<input type="text" id="val6">
+		<input type="button" onclick="alterElement('6')" value="Replace">
+		</form>
+		
+		
+		</div>		
+		<div class="item-sub-e1"><br></div>
+		<div class="item-sub-e2"><br></div>
+	  </div>
+    </div>
+  </div>
+ 
+ </body>
+</html>
