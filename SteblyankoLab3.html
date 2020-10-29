@@ -27,6 +27,7 @@
 	alert("There were "+maxcount+" maximums.");
 	document.cookie = "maxcount="+maxcount+"; path=/; max-age=3600";
 	console.log(document.cookie);
+	location.reload();
   };
   
   function getCookie(cname) {
@@ -90,7 +91,7 @@ function cleanseElement(id) {
 	  <div class="sub-grid-container-1">
 		<div class="item-sub-d" id="el1"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum tristique diam, eu iaculis odio tempor ut. Duis non libero eu felis tincidunt consectetur pellentesque eget velit.</p>
 		<form>
-		<input type="text" id="val1">
+		<textarea id="val1"></textarea>
 		<input type="button" onclick="alterElement(1)" value="Replace">
 		</form>
 		
@@ -129,7 +130,7 @@ function cleanseElement(id) {
 	};
 	</script>
 	<form>
-	<input type="text" id="val2">
+	<textarea id="val2"></textarea>
 	<input type="button" onclick="alterElement('2')" value="Replace">
 	</form>
 	</div>
@@ -161,7 +162,7 @@ function cleanseElement(id) {
 	</form>
 	
 	<form>
-	<input type="text" id="val3">
+	<textarea id="val3"></textarea>
 	<input type="button" onclick="alterElement('3')" value="Replace">
 	</form>
     </div>
@@ -176,13 +177,13 @@ function cleanseElement(id) {
 	<p>Curabitur rutrum euismod felis, nec lobortis justo vehicula in. Suspendisse pulvinar efficitur lorem, sit amet aliquam lectus cursus eu. Donec in elit vel ex porta aliquet. Ut aliquet tortor dolor, vestibulum facilisis urna venenatis id. Nulla rutrum, odio sit amet blandit posuere, odio mi convallis purus, at tempus ipsum est vitae eros. Nullam sollicitudin libero sed lacus varius suscipit. Pellentesque non turpis eros.</p>
     
 	<form>
-	<input type="text" id="val4">
+	<textarea id="val4"></textarea>
 	<input type="button" onclick="alterElement('4')" value="Replace">
 	</form>
     </div>
     <div class="item5" id="el5"><p>Aliquam sodales mi sit amet arcu laoreet, et condimentum augue rhoncus. Ut id nulla a magna venenatis lacinia eget ac ante. Etiam vitae magna vulputate, ultrices lacus non, sodales massa. In hac habitasse platea dictumst. Sed ac mauris luctus, placerat massa bibendum, iaculis orci. Curabitur venenatis scelerisque eros viverra aliquet. Vivamus non tellus tincidunt, suscipit mi pretium, commodo orci. Sed vel mi suscipit, porta dolor quis, euismod nunc.</p>
     <form>
-	<input type="text" id="val5">
+	<textarea id="val5"></textarea>
 	<input type="button" onclick="alterElement('5')" value="Replace">
 	</form>
     </div>
@@ -197,7 +198,7 @@ function cleanseElement(id) {
 		</div>	
 		<div class="item-sub-da" id="el6"><p>Integer elit velit, ornare vitae finibus quis, accumsan at elit. Nunc pharetra, nulla vel tempor consectetur, nulla felis commodo mi, a porta turpis turpis vel lorem. Phasellus ullamcorper efficitur facilisis. Morbi dolor justo, rhoncus interdum est at, fringilla faucibus massa. Sed viverra dui quis leo maximus posuere. Pellentesque ut risus non nulla mattis semper. Nullam vitae tincidunt velit. Curabitur tempus magna et ullamcorper gravida. Aenean ac metus sit amet nunc finibus pellentesque. Morbi ut mi efficitur, viverra dolor sed, ultrices felis. Integer non scelerisque tortor. Mauris nibh elit, pulvinar id porttitor at, gravida ornare ligula.</p>
 		<form>
-		<input type="text" id="val6">
+		<textarea id="val6"></textarea>
 		<input type="button" onclick="alterElement('6')" value="Replace">
 		</form>
 		
