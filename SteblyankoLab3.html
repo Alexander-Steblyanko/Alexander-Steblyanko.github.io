@@ -71,7 +71,6 @@
   val = document.getElementById("val"+id).value +
   "<input type=\"submit\" onclick=\"cleanseElement("+id+")\" value=\"CLEANSE\">";
   localStorage.setItem(id, val);
-  alert(localStorage.getItem(id));
   el.innerHTML = val;
 };
 
