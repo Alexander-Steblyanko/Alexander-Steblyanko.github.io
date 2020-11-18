@@ -3,8 +3,6 @@
  <head>
   <script>
   /* Task 1 */
-  var h1 = "Заголовок 1";
-  var h2 = "Заголовок 2";
 
   /* Task 2 */
   function calc_circle_area(r) {document.write(Math.PI*Math.pow(r,2));}
@@ -65,26 +63,40 @@
   <title>Стеблянко 3</title>
   <link rel="stylesheet" href="Lab2-grid.css">
  </head>
- <body onload="getcolor(); confirmcookies(); for(i=1; i < 7; i++) {loadElement(i);}">
+ <body onload="swap(); getcolor(); confirmcookies(); for(i=1; i < 7; i++) {loadElement(i);}">
  <script>
+ alert("head loaded");
+
+ 
+ function swap() {
+  var h1 = document.getElementById("h1").innerHTML;
+  document.getElementById("h1").innerHTML = document.getElementById("h2")innerHTML;
+  document.getElementById("h2") = h1;
+ }; 
+ 
+ /* Task 6 */
+ /*
  function alterElement(id) {
   el = document.getElementById("el"+id);
   val = document.getElementById("val"+id).value +
   "<input type=\"submit\" onclick=\"cleanseElement("+id+")\" value=\"CLEANSE\">";
   localStorage.setItem(id, val);
   el.innerHTML = val;
-};
+ };
 
-function loadElement(id) {
+ function loadElement(id) {
   if (localStorage.getItem(id)) { 
     document.getElementById("el"+id).innerHTML = localStorage.getItem(id);
-    };
+  }; else {
+	document.getElementById("val"+id).value = document.getElementById("el"+id).innerHTML;
   };
+  document.getElementById("val"+id).value = document.getElementById("el"+id).innerHTML;
+ };
 
-function cleanseElement(id) {
+ function cleanseElement(id) {
   localStorage.removeItem(id);
-  document.getElementById("el"+id).reload(true);
-};
+ };
+ */
  </script>
   <div class="grid-container" id="cont">
     <div class="item1">
@@ -97,8 +109,8 @@ function cleanseElement(id) {
 		
 		</div>
         <div class="item-sub-h">
-          <p class="flowery">
-		  <script>document.write(h2);</script>
+          <p class="flowery" id="h1">
+		  Заголовок 1
 		  </p>
         </div>
 	  </div>
@@ -190,10 +202,8 @@ function cleanseElement(id) {
     <div class="item6">
       <div class="sub-grid-container-2">
 		<div class="item-sub-ha">
-		  <p class="flowery">
-		  <script>
-		  document.write(h1);
-		  </script>
+		  <p class="flowery" id="h2">
+		  Заголовок 2
 		  </p>
 		</div>	
 		<div class="item-sub-da" id="el6"><p>Integer elit velit, ornare vitae finibus quis, accumsan at elit. Nunc pharetra, nulla vel tempor consectetur, nulla felis commodo mi, a porta turpis turpis vel lorem. Phasellus ullamcorper efficitur facilisis. Morbi dolor justo, rhoncus interdum est at, fringilla faucibus massa. Sed viverra dui quis leo maximus posuere. Pellentesque ut risus non nulla mattis semper. Nullam vitae tincidunt velit. Curabitur tempus magna et ullamcorper gravida. Aenean ac metus sit amet nunc finibus pellentesque. Morbi ut mi efficitur, viverra dolor sed, ultrices felis. Integer non scelerisque tortor. Mauris nibh elit, pulvinar id porttitor at, gravida ornare ligula.</p>

@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML  4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Стеблянко Grid</title>
+  <link rel="stylesheet" href="Lab2-grid.css">
+ </head>
+ <body onload="swapChain();">
+  <script>
+  // Task 1
+  function swap(id1, id2) {
+    var hold = document.getElementById("el"+id1).innerHTML;
+    document.getElementById("el"+id1).innerHTML = document.getElementById("el"+id2).innerHTML;
+    document.getElementById("el"+id2).innerHTML = hold;
+  };
+  
+  function swapChain() {
+  t = 0;
+  for (i = 1; i < 6; i++) {
+	t += 5000*i;
+	setTimeout(swap, t, i, i+1);
+	}
+  };
+  
+  
+  // Task 2
+  function colorBipolar() {
+	if (document.getElementById("el3").style.cssText == "color: blue;") { 
+	  document.getElementById("el3").style.cssText = "color: red;";
+	} else { 
+	  document.getElementById("el3").style.cssText = "color: blue;";
+	};
+  };
+  
+  function blurColorize() {
+	setTimeout(function(){ document.getElementById("el1").style.cssText += "color:green"; 
+						   document.getElementById("el6").style.cssText += "color:green"; }, 5000);
+	setInterval(colorBipolar, 5000);
+  };
+  
+  
+  // Task 3
+  function connect() { 
+	var acc = document.getElementById("accname").value;
+	var repo = document.getElementById("reponame").value;
+	
+	setTimeout(function(){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+		  if (this.readyState == 4 && this.status == 200) {
+			var result = JSON.parse(this.responseText);
+			for (i in result) {
+			  document.getElementById("el2").insertAdjacentHTML('beforeend', "<p>"+result[i].commit.author.name + ": " + result[i].commit.message+"</p>");
+			};
+		  }
+		  else if (this.readyState == 4 && this.status !== 200) {
+			document.getElementById("el2").insertAdjacentHTML('beforeend', "<p>Error: "+this.status+" ("+this.statusText+")</p>");
+			return;
+		  };		  
+		};
+		xhttp.open("GET", 'https://api.github.com/repos/'+acc+'/'+repo+'/commits', true);
+		xhttp.send();
+	}, 500);
+  };
+  
+  
+  // Task 4
+  function callMe1() { console.log("Function 1 executed"); };
+  
+  function callMe2() { console.log("Function 2 executed"); };
+  
+  function callback(func1, func2) {
+	func1();
+	func2();
+  };
+  
+  
+  // Task 5
+  function numReader() {
+	var table = document.getElementById("numtable").value.split(',');
+	
+	// Non-num cleanup
+	for (i = table.length - 1; i > -1; i -= 1) { if (/[^0-9]/g.test(table[i]) || table[i] === "") { table.splice(i, 1); }; };
+	
+	// Insertion sort
+    var step = 0;
+    for (i = 1; i < table.length; i++) {
+        var j = i;
+        step += 1;
+        while (j >= 1 && table[j] <= table[j-1]) {
+            step += 1;
+			var hold = table[j-1];
+			table[j-1] = table[j];
+			table[j] = hold;
+            j -= 1;
+			};
+		};
+	alert("Sorted table:"+'\n'+table);
+	document.getElementById("numtable").value = table;
+  };
+  
+  
+  </script>
+  <div class="grid-container">
+    <div class="item1">
+	  <div class="sub-grid-container-1">
+		<div class="item-sub-d" id="el1"><p id="tx1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum tristique diam, eu iaculis odio tempor ut. Duis non libero eu felis tincidunt consectetur pellentesque eget velit.</p>
+		<input type="text" id="blursed" onblur="blurColorize()" value="Don't ignore me!"></div>
+    
+        <div class="item-sub-h">
+          <p class="flowery">Заголовок 1</p>
+        </div>
+	  </div>
+	
+	</div>
+    
+    <div class="item2" id="el2"><p>Suspendisse sapien neque, rutrum a porta ac, suscipit quis urna. Duis id massa lectus. Curabitur eget velit vitae dolor congue iaculis. Quisque viverra, orci vitae fermentum mollis, felis eros gravida metus, a pellentesque nibh ante quis orci. Nullam tortor justo, vehicula sit amet tristique sed, condimentum euismod massa. Integer in felis eleifend, placerat tortor nec, luctus velit. Ut semper nulla et lectus facilisis efficitur.</p>
+	<form>
+	<label for="accname">Account:</label>
+	<input type="text" id="accname" name="accname" value="Alexander-Steblyanko">
+	<br>
+	<label for="reponame">Repository:</label>
+	<input type="text" id="reponame" name="reponame" value="Alexander-Steblyanko.github.io">
+	<br>
+	<input type="button" onclick="connect()" value="Browse">
+	</form>
+	</div>
+	
+    <div class="item3" id="el3">
+	<img src="Bostonflowers.png" height="300" width="300" alt="Boston Flowers logo" usemap="#flowers">
+	<map name="flowers"><area shape="rect" coords="25, 260, 270, 300" href="https://blaseball.fandom.com/wiki/Boston_Flowers">
+	<p>Phasellus ultricies mauris vitae tincidunt pretium. Nam et mollis lectus. Nulla in convallis dolor. Etiam non rutrum quam. Vivamus tortor lectus, dapibus ac tortor vulputate, faucibus laoreet massa. Nulla venenatis orci dui, quis mollis magna tempor eget. Vestibulum a felis augue.</p>
+    <form>
+	<textarea id="numtable"></textarea><br>
+	<input type="button" onclick="numReader()" value="Sort">
+	</form>
+	</div>
+	
+    <div class="item4" id="el4">Nullam hendrerit, sapien id varius pellentesque, diam ligula vehicula tortor, nec scelerisque mauris sapien vel ligula.</p> 
+	<ol>
+	<li>Nullam molestie ut justo in tempus.</li> 
+	<li>Etiam nec aliquam arcu.</li> 
+	<li>Pellentesque vel felis varius, bibendum lacus ullamcorper, hendrerit ipsum.</li>
+	</ol>
+	<p>Curabitur rutrum euismod felis, nec lobortis justo vehicula in. Suspendisse pulvinar efficitur lorem, sit amet aliquam lectus cursus eu. Donec in elit vel ex porta aliquet. Ut aliquet tortor dolor, vestibulum facilisis urna venenatis id. Nulla rutrum, odio sit amet blandit posuere, odio mi convallis purus, at tempus ipsum est vitae eros. Nullam sollicitudin libero sed lacus varius suscipit. Pellentesque non turpis eros.</p>
+    
+    </div>
+    <div class="item5" id="el5"><p>Aliquam sodales mi sit amet arcu laoreet, et condimentum augue rhoncus. Ut id nulla a magna venenatis lacinia eget ac ante. Etiam vitae magna vulputate, ultrices lacus non, sodales massa. In hac habitasse platea dictumst. Sed ac mauris luctus, placerat massa bibendum, iaculis orci. Curabitur venenatis scelerisque eros viverra aliquet. Vivamus non tellus tincidunt, suscipit mi pretium, commodo orci. Sed vel mi suscipit, porta dolor quis, euismod nunc.</p>
+    
+    </div>
+    <div class="item6">
+      <div class="sub-grid-container-2">
+		<div class="item-sub-ha">
+		  <p class="flowery">Заголовок 2</p>
+		</div>
+		
+		<div class="item-sub-da" id="el6"><p>Integer elit velit, ornare vitae finibus quis, accumsan at elit. Nunc pharetra, nulla vel tempor consectetur, nulla felis commodo mi, a porta turpis turpis vel lorem. Phasellus ullamcorper efficitur facilisis. Morbi dolor justo, rhoncus interdum est at, fringilla faucibus massa. Sed viverra dui quis leo maximus posuere. Pellentesque ut risus non nulla mattis semper. Nullam vitae tincidunt velit. Curabitur tempus magna et ullamcorper gravida. Aenean ac metus sit amet nunc finibus pellentesque. Morbi ut mi efficitur, viverra dolor sed, ultrices felis. Integer non scelerisque tortor. Mauris nibh elit, pulvinar id porttitor at, gravida ornare ligula.</p></div>
+		
+		<div class="item-sub-e1"><br></div>
+		<div class="item-sub-e2"><br></div>
+	  </div>
+    </div>
+  </div>
+ 
+ </body>
+</html>
