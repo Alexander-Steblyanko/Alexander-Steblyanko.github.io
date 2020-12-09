@@ -2,7 +2,7 @@
 <html>
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>Стеблянко Grid</title>
+  <title>Стеблянко 4</title>
   <link rel="stylesheet" href="Lab2-grid.css">
  </head>
  <body onload="swapChain();">
@@ -49,18 +49,21 @@
 		xhttp.onreadystatechange = function() {
 		  if (this.readyState == 4 && this.status == 200) {
 			var result = JSON.parse(this.responseText);
+			document.getElementById("commitdisplay").innerHTML = "";
 			for (i in result) {
-			  document.getElementById("el2").insertAdjacentHTML('beforeend', "<p>"+result[i].commit.author.name + ": " + result[i].commit.message+"</p>");
+			  //document.getElementById("el2").insertAdjacentHTML('beforeend', "<p>"+result[i].commit.author.name + ": " + result[i].commit.message+"</p>");
+			  document.getElementById("commitdisplay").innerHTML += "<p>"+result[i].commit.author.name + ": " + result[i].commit.message+"</p>";
 			};
 		  }
 		  else if (this.readyState == 4 && this.status !== 200) {
-			document.getElementById("el2").insertAdjacentHTML('beforeend', "<p>Error: "+this.status+" ("+this.statusText+")</p>");
+			//document.getElementById("el2").insertAdjacentHTML('beforeend', "<p style=\"background-color:red;\">Error: "+this.status+" ("+this.statusText+")</p>");
+			document.getElementById("commitdisplay").innerHTML = "<p style=\"background-color:red;\">Error: "+this.status+" ("+this.statusText+")</p>";
 			return;
 		  };		  
 		};
 		xhttp.open("GET", 'https://api.github.com/repos/'+acc+'/'+repo+'/commits', true);
 		xhttp.send();
-	}, 500);
+	}, 2500);
   };
   
   
@@ -80,7 +83,7 @@
 	var table = document.getElementById("numtable").value.split(',');
 	
 	// Non-num cleanup
-	for (i = table.length - 1; i > -1; i -= 1) { if (/[^0-9]/g.test(table[i]) || table[i] === "") { table.splice(i, 1); }; };
+	for (i = table.length - 1; i > -1; i -= 1) { if (!(/-?[0-9]+.?[0-9]*/g.test(table[i]))) { table.splice(i, 1); }; };
 	
 	// Insertion sort
     var step = 0;
@@ -124,6 +127,7 @@
 	<br>
 	<input type="button" onclick="connect()" value="Browse">
 	</form>
+	<div id="commitdisplay"> </div>
 	</div>
 	
     <div class="item3" id="el3">
