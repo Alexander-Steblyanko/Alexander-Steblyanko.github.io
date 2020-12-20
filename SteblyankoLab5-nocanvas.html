@@ -2,13 +2,13 @@
 <html>
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>Стеблянко ЛР 5</title>
-  <link rel="stylesheet" href="Lab5-grid.css">
+  <title>Стеблянко ЛР 5 No Canvas</title>
+  <link rel="stylesheet" href="Lab5-nocanvas.css">
  </head>
  <body>
   
   <script>
-  var overlay = '<div class="work" id="overlay"><div class="outputs"><textarea id="record"></textarea></div><div class="controls"><input type="button" value="start" id="playbutton" onclick="ball.play(); enablebutton(\'stop\');"><input type="button" value="emergency reload" onclick="ball.load(); enablebutton(\'start\');"><input type="button" value="close" onclick="deactivateBalls()"></div><div class="anim-cont"><canvas class="anim"></canvas></div></div>'
+  var overlay = '<div class="work" id="overlay"><div class="outputs"><textarea id="record"></textarea></div><div class="controls"><input type="button" value="start" id="playbutton" onclick="ball.play(); enablebutton(\'stop\');"><input type="button" value="emergency reload" onclick="ball.load(); enablebutton(\'start\');"><input type="button" value="close" onclick="deactivateBalls()"></div><div class="anim-cont"><div class="ball" id="Ball"></div></div>'
   </script>
   <!-- 
   <div class="work" id="overlay">
@@ -21,7 +21,7 @@
 	  <input type="button" value="close" onclick="deactivateBalls()">
 	</div>
 	<div class="anim-cont">
-	  <canvas class="anim"></canvas>
+	  <div class="ball" id="Ball">
 	</div>
   </div>
   -->
@@ -32,14 +32,14 @@
 	
 	// Запуск скриптів
 	var script = document.createElement("script");
-	script.src = "balls.js";
-	script.id = 'canvasscript';
+	script.src = "ballsNoCanvas.js";
+	script.id = 'animscript';
 	document.body.appendChild(script);
 	
 	// Запис події
 	localStorage.removeItem("events");
 	localStorage.events = new Date().toUTCString() + " Overlay opened.<br>";
-	record.value += 'Overlay opened.\n';
+	document.getElementById('record').value += 'Overlay opened.\n';
   };
   
   function deactivateBalls() { 
@@ -47,7 +47,7 @@
 	localStorage.events += new Date().toUTCString() + " Overlay closed.<br>";
 	
 	// Видалення таблиці
-	var script = document.getElementById('canvasscript');
+	var script = document.getElementById('animscript');
 	script.parentNode.removeChild(script);
 	
     var activelay = document.getElementById('overlay');
